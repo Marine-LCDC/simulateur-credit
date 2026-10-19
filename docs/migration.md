@@ -1,5 +1,9 @@
 # Publication après validation explicite
 
+Le dossier opérationnel actualisé est docs/publication-readiness-2026-10-19.md.
+Il remplace l’ordre simplifié ci-dessous : code Titayla et registre fusionné doivent
+être publiés ensemble via la configuration dédiée qui préserve les inscriptions.
+
 ## Périmètre
 
 Dépôt cible : Marine-LCDC/simulateur-credit. APP_ID conservé : simulation-credit.
