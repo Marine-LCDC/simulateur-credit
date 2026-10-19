@@ -1,0 +1,15 @@
+{
+  "checkedOn": "2026-10-19",
+  "project": "Titayla, matched against live Worker configuration",
+  "method": "SELECT only: system metadata and aggregate counts, no customer identifiers exported",
+  "productionMutation": false,
+  "liveSimulatorIndividualSubscriptionsValid": 0,
+  "livePassSubscriptionsValidForSimulator": 0,
+  "realPositiveAccessAcceptance": "Blocked until an authorized tester legitimately has a real central entitlement; none created by this mission",
+  "rlsEnabled": ["app_access_versions", "stripe_customers", "subscription_items", "subscriptions"],
+  "appsNonInternalTriggers": [
+    {"name": "touch_updated_at", "function": "private.touch_updated_at", "normalizedBodyMd5": "d258fba5feeb9ce8126471bef81c3228", "matchesRepositoryMigration": "20260928000100_catalog_structure.sql"},
+    {"name": "commercial_integrity", "function": "private.check_commercial_integrity", "normalizedBodyMd5": "0b648cce6ab7beb6bdb57437ae861075", "matchesRepositoryMigration": "20260929000100_admin_catalog.sql"}
+  ],
+  "triggerReview": "Timestamp update and read-only commercial integrity validation; no subscription or payment write in these trigger functions"
+}

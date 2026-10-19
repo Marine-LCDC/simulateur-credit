@@ -50,7 +50,7 @@ const snapshot={capturedAt:new Date().toISOString(),productionMutation:false,acc
  catalogue:{apps,composition,plans,fingerprint:hash({apps,composition,plans})},
  domain:{targetExists:!!target,targetService:target?.service??null,dns,allAssociations:domains.map(d=>({hostname:d.hostname,service:d.service,environment:d.environment})),existingWorker:worker?{id:worker.id,modified_on:worker.modified_on}:null},
  auth:{anonymousRightsStatus:api.status},
- exclusions:['No customer/subscription rows read','No payment or email','No Worker deployment','No production setting update','No legacy domain modification'],
+ exclusions:['No individual customer or subscription records exported','No payment or email','No Worker deployment','No production setting update','No legacy domain modification'],
 };
 const dir='test-results/production-preflight';mkdirSync(dir,{recursive:true});
 writeFileSync(dir+'/snapshot.json',JSON.stringify(snapshot,null,2)+'\n');

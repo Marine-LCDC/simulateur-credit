@@ -46,6 +46,21 @@ Les validations positives du protocole, des rôles, des périodes, de la révoca
 Une recette positive avec compte réellement autorisé reste une condition d'acceptation après raccordement.
 Aucun compte client, abonnement, Customer Stripe ou e-mail n'a été utilisé comme fixture réelle.
 
+### Contrôle SQL distant complémentaire
+
+Une lecture SELECT de métadonnées et de compteurs agrégés a confirmé le projet Titayla utilisé par le Worker,
+la RLS active sur les quatre tables sensibles d'accès/facturation et les deux triggers de public.apps.
+Les empreintes de leurs fonctions correspondent aux migrations du dépôt : mise à jour de timestamp et validation
+d'intégrité commerciale, sans écriture d'abonnement ni de paiement. Aucun identifiant client n'a été exporté.
+
+**Point bloquant pour la recette positive réelle : zéro abonnement individuel Live valide pour simulation-credit,
+et zéro abonnement Pass Live valide incluant cette application, à l'instant du contrôle.**
+La publication technique est préparée, mais il n'existe donc pas actuellement de droit commercial réel éligible
+pour réaliser les deux tests positifs demandés. Aucun abonnement ou droit n'a été créé/modifié pour contourner cette limite.
+Un testeur légitimement doté d'un droit central réel doit être disponible avant l'acceptation finale du service ;
+la façon d'obtenir ce droit exige une décision séparée si elle implique de nouveaux droits, abonnements ou paiements.
+Preuve agrégée : docs/database-readiness-2026-10-19.json.
+
 ## Validations renouvelées
 
 Simulateur : build/TypeScript, 36 tests, Worker local + Chromium, recette HTTPS privée individuelle et Pass,
