@@ -1,0 +1,31 @@
+{
+  "name": "simulateur-credit",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/test-credit.mjs scripts/test-access.mjs scripts/test-migration.mjs",
+    "test:worker": "node scripts/test-worker.mjs",
+    "preview": "wrangler dev --local --ip 127.0.0.1 --port 8788 --config wrangler.staging.jsonc",
+    "deploy:staging": "node scripts/deploy-staging.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "jspdf": "4.2.1",
+    "jspdf-autotable": "5.0.8"
+  },
+  "devDependencies": {
+    "vite": "8.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "5.9.3",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@types/node": "24.10.0",
+    "wrangler": "4.136.3",
+    "@playwright/test": "1.63.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "sourceRepository": "Marine-LCDC/titayla",
+  "sourceCommits": [
+    "d20ceb153f54741c8cb36c22bff63d0afe0998d6",
+    "deed5cbc27b9ecc0805a79f83a05916394fc969e"
+  ],
+  "baseline": "24717e97770e5017286301a34acb47590a57fef2",
+  "accessReference": "Marine-LCDC/prompteur: titayla-access (same protocol as Titayla main)",
+  "files": {
+    "src/components/credit-simulator/amortization-table.tsx": "f3ff5508842a11def3907f202259311b517bd18f6caca46ad8e1b9fc383b8fcc",
+    "src/components/credit-simulator/credit-field.tsx": "e66f2e46efac26583ae9ef3ebfac2dc4f077db8d59b2a52e724e4015536f595d",
+    "src/components/credit-simulator/credit-simulator.css": "3c7854de0731e725e07852d0d895c2f44d66a17b499665a242b486944bf3e29c",
+    "src/components/credit-simulator/credit-simulator.tsx": "722e7478cbdb67e5e71872ea5b78444fa1e0c81cad708e085f1fbd247d4588a4",
+    "src/components/credit-simulator/credit-summary.tsx": "2e89374f0d99db5b04a9303f4fbaaaddc41fbd1502d6dfd146b343ab22719d68",
+    "src/lib/credit-simulator/calculations.ts": "4e50a1b91cf5d03a164a7c551794014ff52d9a8171b149b1d439d23937924b50",
+    "src/lib/credit-simulator/format.ts": "87c55ccb90193d8b61f9021f39b8b08513392e9652260056ef468d9798ccc60e",
+    "src/lib/credit-simulator/pdf.ts": "f794ecb58d9a73febd2a535ac7e0c34de86551d39180150e58e1b41ddbde2437",
+    "src/lib/credit-simulator/types.ts": "df63ab3929641fb804ee7108d514fba901dce27fe37de733be59e667bc9528b6",
+    "src/lib/credit-simulator/validation.ts": "db1587c9c451a0dd9bcbceba202ce5600e14d7e099d2e20635f47c4194b5b429",
+    "scripts/test-credit.mjs": "232a6275e6bc2a7726232043245b2ccdbffe669bacc0018401401595c8799cd0"
+  }
+}

@@ -1,0 +1,10 @@
+import {execFileSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+const git=args=>execFileSync('git',args,{encoding:'utf8',windowsHide:true}).trim();
+assert.equal(git(['status','--porcelain']),'','Commit all reviewed changes first');
+assert.equal(git(['remote','get-url','origin']),'https://github.com/Marine-LCDC/simulateur-credit.git');
+const branch=git(['branch','--show-current']);
+assert.equal(branch,'codex/migration-titayla');
+const sha=git(['rev-parse','HEAD']);
+assert.equal(git(['ls-remote','origin','refs/heads/'+branch]),sha+'\trefs/heads/'+branch);
+execFileSync(process.execPath,['node_modules/wrangler/bin/wrangler.js','deploy','--config','wrangler.staging.jsonc','--message',sha],{stdio:'inherit',windowsHide:true});
