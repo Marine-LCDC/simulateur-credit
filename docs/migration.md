@@ -53,3 +53,10 @@ candidats : src/components/credit-simulator/*, src/lib/credit-simulator/*,
 scripts/test-credit.mjs ; retirer jsPDF uniquement après contrôle de tous ses
 autres usages. Conserver fiche, SEO, route de compatibilité, Pass et droits.
 L'ancien CNAME GitHub Pages et son domaine historique ne sont pas modifiés.
+
+## Transport Cloudflare
+
+Le flag global_fetch_strictly_public permet les appels HTTP entre Workers du
+même compte, y compris workers.dev pendant la recette. Les origines restent
+validées et toutes les redirections du vérificateur sont refusées. Aucun
+changement du protocole générique ou contournement des droits.

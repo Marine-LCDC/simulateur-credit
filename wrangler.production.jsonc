@@ -21,5 +21,8 @@
   "vars": {
     "APP_ID": "simulation-credit",
     "TITAYLA_URL": "https://titayla.com"
-  }
+  },
+  "compatibility_flags": [
+    "global_fetch_strictly_public"
+  ]
 }

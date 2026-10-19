@@ -15,5 +15,8 @@
   "vars": {
     "APP_ID": "simulation-credit",
     "TITAYLA_URL": "https://simulateur-credit-recette-auth.small-queen-a4c0.workers.dev"
-  }
+  },
+  "compatibility_flags": [
+    "global_fetch_strictly_public"
+  ]
 }
