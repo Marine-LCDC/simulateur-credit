@@ -1,5 +1,7 @@
 # Simulateur — reprise préparée, publication non autorisée
 
+Actualisation : le dossier `runroc-finalisation-2026-10-20.md` décrit la capacité Paid mesurée, la recette Stripe Test réelle et la décision comptable désormais bloquante. Les constats antérieurs ci-dessous sont conservés pour l'historique.
+
 Branche `codex/simulator-commercial-readiness` issue de `codex/fix-sso-1102` ; anciens travaux conservés. Moteur, rendu, mensualité hors assurance et PDF inchangés. Worker cible existant `simulateur-credit`, domaine exclusif `simulateur-credit.titayla.com`, identifiant d'accès `simulation-credit`. Toutes les ressources restent derrière le garde central ; vérification des droits à chaque requête, refus sur indisponibilité et cache de préparation RSA seulement.
 
 La facturation appartient entièrement au portail Titayla : 5 € HT/mois individuel OU Pass valide incluant le simulateur. Aucun module Stripe, compte client supplémentaire ou prix Live ajouté ici. Aucun besoin d'achat supplémentaire avec le Pass. Le portail candidat bloque désormais aussi le POST direct Checkout pour ce cas.
