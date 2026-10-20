@@ -30,7 +30,7 @@ try{
   const r=await fetch(origin+path,{redirect:'manual'});assert.equal(r.status,303,path);
  }
  for(const path of ['/','/legacy/index.html','/CNAME','/api/private/'])assert.ok([303,401].includes((await fetch(origin+path,{redirect:'manual'})).status));
- browser=await chromium.launch();const context=await browser.newContext({acceptDownloads:true,reducedMotion:"reduce"});
+ browser=await chromium.launch(process.env.PLAYWRIGHT_CHANNEL?{channel:process.env.PLAYWRIGHT_CHANNEL}:{});const context=await browser.newContext({acceptDownloads:true,reducedMotion:"reduce"});
  const start=await context.request.get(origin+'/auth/titayla/start/',{maxRedirects:0});assert.equal(start.status(),303);
  const nonce=new URL(start.headers().location).searchParams.get('state');
  const token=await signAssertion('fixture-user','simulation-credit',privateKey,nonce);
