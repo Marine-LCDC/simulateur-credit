@@ -203,18 +203,19 @@ test("deploy always runs Worker first and reusable files match Titayla reference
   assert.equal(parsed.error, undefined);
   const c = parsed.config;
   assert.equal(c.assets.run_worker_first, true);
-  for (const f of ["protocol", "guard", "callback"])
+  for (const f of ["protocol", "guard", "callback", "rsa-key"])
     assert.equal(
       createHash("sha256")
         .update(readFileSync("titayla-access/" + f + ".ts", "utf8").replace(/\r\n/g,"\n"))
         .digest("hex"),
       {
         protocol:
-          "558dc33cf8847f01e9107b27857009de342a06160a88add77785d07f3e1378f3",
+          "d88eb0b60dcae8d918df1b7d2e41e6d58f14213088325e4abb05a2af1fe0eeb6",
         guard:
           "04e95034041912a3fe1c0611cdd2c61a6d1a10eab765994e385af30b5fa5abbb",
         callback:
           "dd832034a4e98a9fb1214db0149e3c6ca6009fa6913a2b43446855b905bb3950",
+        "rsa-key": "9b8cef490aa1e3b74cadb418514e00d129c9c9edf3261a8db6d0e05db810a493",
       }[f],
     );
 });

@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
-    "test": "node --test scripts/test-credit.mjs scripts/test-access.mjs scripts/test-migration.mjs",
+    "test": "node --test scripts/test-credit.mjs scripts/test-access.mjs scripts/test-migration.mjs scripts/test-rsa-key-cache.mjs",
     "test:worker": "node scripts/test-worker.mjs",
     "preview": "wrangler dev --local --ip 127.0.0.1 --port 8788 --config wrangler.staging.jsonc",
     "deploy:staging": "node scripts/deploy-staging.mjs"

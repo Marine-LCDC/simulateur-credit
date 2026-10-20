@@ -1,4 +1,5 @@
 // Portable Web Crypto; signing key belongs exclusively to Titayla.
+import { preparedRsaKey } from './rsa-key.ts';
 export const accessHeaders = { 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'no-referrer' };
 export const validAppId = (id: string) => /^[a-z0-9][a-z0-9-]{0,63}$/.test(id);
 export const accessPath = (id: string) => `/acces/${encodeURIComponent(id)}/`;
@@ -12,7 +13,7 @@ export interface Assertion { iss: 'titayla'; sub: string; aud: string; iat: numb
 export const validNonce = (value: string) => /^[a-f0-9]{64}$/.test(value);
 export async function signAssertion(sub: string, appId: string, jwk: JsonWebKey, nonce: string, now = Date.now(), version = 'initial') {
   if (!validAppId(appId) || !sub || jwk.kty !== 'RSA' || !validNonce(nonce)) throw new Error('Invalid configuration');
-  const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['sign']);
+  const key = await preparedRsaKey(jwk, 'sign');
   const iat = Math.floor(now / 1000);
   const payload: Assertion = { iss: 'titayla', sub, aud: appId, iat, exp: iat + 300, jti: crypto.randomUUID(), nonce, version };
   const body = `${encode(encoder.encode(JSON.stringify({ alg: 'RS256', typ: 'JWT' })))}.${encode(encoder.encode(JSON.stringify(payload)))}`;
@@ -24,7 +25,7 @@ export async function verifyAssertion(token: string, appId: string, jwk: JsonWeb
     const parts = token.split('.'); if (parts.length !== 3) return null;
     const header = JSON.parse(new TextDecoder().decode(decode(parts[0])));
     if (header.alg !== 'RS256' || header.typ !== 'JWT') return null;
-    const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
+    const key = await preparedRsaKey(jwk, 'verify');
     if (!await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, decode(parts[2]), encoder.encode(`${parts[0]}.${parts[1]}`))) return null;
     const p = JSON.parse(new TextDecoder().decode(decode(parts[1])));
     const seconds = Math.floor(now / 1000);

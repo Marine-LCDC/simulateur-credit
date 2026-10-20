@@ -1,7 +1,7 @@
 name: Validate simulator migration
 on:
   push:
-    branches: [codex/migration-titayla]
+    branches: [codex/migration-titayla, codex/fix-sso-1102]
   pull_request:
 permissions:
   contents: read
