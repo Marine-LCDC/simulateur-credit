@@ -212,9 +212,9 @@ test("deploy always runs Worker first and reusable files match Titayla reference
         protocol:
           "d88eb0b60dcae8d918df1b7d2e41e6d58f14213088325e4abb05a2af1fe0eeb6",
         guard:
-          "04e95034041912a3fe1c0611cdd2c61a6d1a10eab765994e385af30b5fa5abbb",
+          "2da3be16fb24bae9412fdf7176ea2d0492a2648d90506cf61d94f40bfe9cee51",
         callback:
-          "dd832034a4e98a9fb1214db0149e3c6ca6009fa6913a2b43446855b905bb3950",
+          "f18d1f551e56fa4ad9391285f786621c5fa434eed3cf31714289304b1afdd90f",
         "rsa-key": "9b8cef490aa1e3b74cadb418514e00d129c9c9edf3261a8db6d0e05db810a493",
       }[f],
     );

@@ -7,32 +7,44 @@ export default function AccessBoundary({
 }) {
   const [allowed, setAllowed] = useState(false);
   const [checking, setChecking] = useState(true);
+  const [reason, setReason] = useState<'temporary' | 'required'>('required');
   useEffect(() => {
     let stopped = false;
     let running = false;
     let generation = 0;
+    // After a failure, recovery is explicit through a fresh SSO handshake.
+    // Keep periodic checks only while the previously verified session is healthy.
+    let blocked = false;
     const check = async () => {
-      if (running || stopped) return;
+      if (running || stopped || blocked) return;
       if (!navigator.onLine) {
+        blocked = true;
+        setReason('temporary');
         setAllowed(false);
+        setChecking(false);
         return;
       }
       running = true;
       const current = generation;
       try {
+        const signal = AbortSignal.timeout(5000);
         const r = await fetch("/api/titayla/session/", {
           cache: "no-store",
           credentials: "same-origin",
           redirect: "error",
-          signal: AbortSignal.timeout(5000),
+          signal,
         });
-        const ok = r.ok && (await r.json()).allowed === true;
+        const ok = !signal.aborted && r.ok && (await r.json()).allowed === true && !signal.aborted;
         if (!stopped && current === generation) {
+          blocked = !ok;
+          setReason([401,403].includes(r.status) ? 'required' : 'temporary');
           setAllowed(ok);
           setChecking(false);
         }
       } catch {
         if (!stopped && current === generation) {
+          blocked = true;
+          setReason('temporary');
           setAllowed(false);
           setChecking(false);
         }
@@ -42,15 +54,19 @@ export default function AccessBoundary({
     };
     const offline = () => {
       generation++;
+      blocked = true;
+      setReason('temporary');
+      setChecking(false);
       setAllowed(false);
     };
     const resume = () => {
+      if (blocked) return;
       generation++;
       setChecking(true);
       void check();
     };
     const visibility = () => {
-      if (document.hidden) setChecking(true);
+      if (document.hidden && !blocked) setChecking(true);
       else resume();
     };
     void check();
@@ -68,15 +84,15 @@ export default function AccessBoundary({
       document.removeEventListener("visibilitychange", visibility);
     };
   }, []);
+  if (checking && !allowed) return <main role="status">Vérification de votre accès…</main>;
   if (!allowed)
     return (
       <main role="alert">
-        <h1>Vérification de votre accès</h1>
+        <h1>{reason === 'temporary' ? 'Vérification temporairement indisponible' : 'Vérification de votre accès'}</h1>
         <p>
-          Une connexion est nécessaire. Les calculs restent effectués
-          sur cet appareil.
+          {reason === 'temporary' ? 'Votre accès n’a pas pu être vérifié. Réessayez dans quelques instants.' : 'Une connexion ou un accès valide est nécessaire.'} Les calculs restent effectués sur cet appareil.
         </p>
-        <a href="/auth/titayla/start/">Vérifier auprès de Titayla</a>
+        <a href="/auth/titayla/start/">Réessayer auprès de Titayla</a>
       </main>
     );
   return (
